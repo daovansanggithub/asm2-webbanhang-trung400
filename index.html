@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home-sandal</title>
+    <!-- link awesome để lấy icon -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <!-- css cho trang chủ -->
+    <style>
+      /* reset lại cấu hình cho tất cả thuộc tính */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        /* font-family: sans-serif; */
+        font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+          "Lucida Sans", Arial, sans-serif;
+      }
+
+      body {
+        width: 100%;
+      }
+
+      #header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px 80px;
+        background-color: rgba(206, 175, 211, 0.5);
+        z-index: 100;
+        position: sticky;
+        top: 0;
+        left: 0;
+      }
+
+      #top-header a,
+      #header a,
+      #navbar li a {
+        text-decoration: none;
+        color: #000;
+      }
+
+      #header > a {
+        font-size: 40px;
+        font-weight: 500;
+      }
+
+      #navbar {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      #navbar li i {
+        cursor: pointer;
+      }
+
+      #navbar li {
+        list-style: none;
+        padding: 0 20px;
+        font-weight: 700;
+      }
+
+      #top-header a:hover,
+      #navbar li a:hover,
+      #navbar li a.active {
+        color: rgb(190, 135, 32);
+      }
+
+      /* Home Page */
+      /* banner */
+      #banner {
+        width: auto;
+        height: 650px;
+      }
+
+      #banner img {
+        width: 100%;
+        height: 100%;
+        /* object-fit: contain; */
+      }
+
+      /* san pham css */
+      /* Add this CSS to your existing style.css file */
+      #product {
+        padding: 20px;
+      }
+
+      .product-container {
+        display: flex;
+        flex-wrap: wrap;
+        /* justify-content: space-between; */
+      }
+
+      .product {
+        width: 23%;
+        min-width: 250px;
+        padding: 10px 12px;
+        margin: 15px 10px;
+        -webkit-transition: 0.3s ease-in-out;
+        transition: 0.3s ease-in-out;
+        position: relative;
+        background-color: #fff;
+        border: 1px solid #000;
+        border-radius: 25px;
+      }
+
+      .product:hover {
+        transform: scale(1.05);
+      }
+
+      .product img {
+        width: 100%;
+        height: 250px;
+        border-radius: 20px;
+      }
+
+      .product-info {
+        text-align: center;
+        padding: 10px 0;
+      }
+
+      .product .price {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+      }
+
+      .product .price .product-price {
+        font-size: 15px;
+        font-weight: 700;
+        color: #645e5e;
+      }
+
+      .product .price .add-to-cart {
+        color: #645e5e;
+      }
+      /* ========================giỏ hàng============== */
+      .giohang {
+        width: 50%;
+        margin: auto;
+        text-align: center;
+        padding-top: 30px;
+      }
+
+      .giohang h2 {
+        margin-bottom: 30px;
+      }
+
+      .giohang table {
+        width: 100%;
+      }
+
+      .giohang table thead tr th:first-child {
+        text-align: left;
+      }
+
+      .giohang table tr td {
+        border-bottom: 1px solid #ddd;
+        padding: 12px 0;
+      }
+      /* -------------------css gio hang------------------------ */
+      .giohang {
+        position: fixed;
+        height: 60vh;
+        width: 500px;
+        right: 0;
+        top: 70px;
+        padding: 12px 20px;
+        overflow-y: scroll;
+        background-color: #d3e3d2;
+        right: -100%;
+      }
+      /* ===========css cho phần cuối trang web */
+      /* CSS cho phần footer */
+      footer {
+        background-color: rgba(206, 175, 211, 0.5);
+        padding: 20px 0;
+      }
+
+      .container {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .contact,
+      .social,
+      .reviews {
+        flex-basis: 30%;
+      }
+
+      .contact h3,
+      .social h3,
+      .reviews h3 {
+        font-size: 18px;
+        margin-bottom: 10px;
+      }
+
+      .contact p,
+      .social ul,
+      .reviews p {
+        font-size: 14px;
+        margin-bottom: 5px;
+      }
+
+      .social ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .social ul li {
+        display: inline-block;
+        margin-right: 10px;
+      }
+
+      .social ul li a {
+        color: #333;
+        font-size: 20px;
+      }
+
+      .reviews p.customer {
+        font-weight: bold;
+      }
+
+      .reviews p.customer:before {
+        content: "-";
+        margin-right: 5px;
+      }
+
+      /* CSS cho biểu tượng FontAwesome */
+      .fa-facebook,
+      .fa-twitter,
+      .fa-instagram {
+        color: #333;
+        transition: color 0.3s ease;
+      }
+
+      .fa-facebook:hover,
+      .fa-twitter:hover,
+      .fa-instagram:hover {
+        color: #1877f2;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- thanh điều hướng của trang web -->
+    <section id="header">
+      <a href="index.html"><img src="" class="logo" alt="" />Sandal-Old</a>
+      <div>
+        <ul id="navbar">
+          <li><a class="active" href="index.html">Home</a></li>
+          <li><a href="hoso.html">Profile</a></li>
+          <li><a href="lienhe.html">Contact me</a></li>
+          <li><a href="login.html">Login</a></li>
+          <li><a href="register.html">Register</a></li>
+          <li>
+            <i class="fa-solid fa-cart-shopping"></i>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Hình ảnh slide -->
+    <section id="banner">
+      <a href="#"><img src="./img/banner-del.jpg" alt="" /></a>
+    </section>
+
+    <!-- danh sách sản phẩm -->
+    <section id="product">
+      <div class="product-container">
+        <div class="product">
+          <img src="./img/p1.jpg" alt="Product 1" />
+          <div class="product-info">
+            <h3>Old sandals 1</h3>
+            <p>Free ship</p>
+            <div class="price">
+              <span class="product-price">19.99</span>
+              <button style="border: none">
+                <i class="fa-solid fa-cart-shopping"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="product">
+          <img src="./img/p2.jpg" alt="Product 2" />
+          <div class="product-info">
+            <h3>Old sandals 2</h3>
+            <p>Ship 100$</p>
+            <div class="price">
+              <span class="product-price">12.99</span>
+              <button style="border: none">
+                <i class="fa-solid fa-cart-shopping"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- Add  -->
+        <div class="product">
+          <img src="./img/p3.jpeg" alt="Product 2" />
+          <div class="product-info">
+            <h3>Old sandals 3</h3>
+            <p>Free ship</p>
+            <div class="price">
+              <span class="product-price">34.99</span>
+              <button style="border: none">
+                <i class="fa-solid fa-cart-shopping"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- //// -->
+        <div class="product">
+          <img src="./img/p4.jpg" alt="Product 2" />
+          <div class="product-info">
+            <h3>Old sandals 4</h3>
+            <p>Sandals stand out the most</p>
+            <!-- <div class="price">
+              <span class="product-price">$56.99</span>
+              <button style="border: none">
+                <i class="fa-solid fa-cart-shopping"></i>
+              </button>
+            </div> -->
+          </div>
+        </div>
+        <!-- ///// -->
+        <div class="product">
+          <img src="./img/p5.jpg" alt="Product 2" />
+          <div class="product-info">
+            <h3>Old sandals 5</h3>
+            <p>Pro</p>
+            <div class="price">
+              <span class="product-price">43.99</span>
+              <button style="border: none">
+                <i class="fa-solid fa-cart-shopping"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- ///// -->
+        <div class="product">
+          <img src="./img/p6.webp" alt="Product 2" />
+          <div class="product-info">
+            <h3>Old sandals 6</h3>
+            <p>Vip</p>
+            <div class="price">
+              <span class="product-price">21.99</span>
+              <button style="border: none">
+                <i class="fa-solid fa-cart-shopping"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        <!--  /////////// -->
+        <div class="product">
+          <img src="./img/p7.jpg" alt="Product 2" />
+          <div class="product-info">
+            <h3>Old sandals 7</h3>
+            <p>Sandal vip pro</p>
+            <div class="price">
+              <span class="product-price">11.99</span>
+              <button style="border: none">
+                <i class="fa-solid fa-cart-shopping"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- /////////// -->
+        <div class="product">
+          <img src="./img/p8.jpg" alt="Product 2" />
+          <div class="product-info">
+            <h3>Old sandals 8</h3>
+            <p>Slippers are the most sold</p>
+            <!-- <div class="price">
+              <span class="product-price">$22.99</span>
+              <button style="border: none">
+                <i class="fa-solid fa-cart-shopping"></i>
+              </button>
+            </div> -->
+          </div>
+        </div>
+        <!--  //////////// -->
+      </div>
+    </section>
+
+    <!-- ======================giỏ hàng====================== -->
+    <section class="giohang">
+      <div style="text-align: left; background-color: red; width: 13px">
+        <i class="fa-solid fa-xmark"></i>
+      </div>
+      <h2 style="background-color: #899a87">Your cart</h2>
+      <form action="">
+        <table style="background-color: #d3e3d2">
+          <thead>
+            <tr>
+              <th>Sandal</th>
+              <th>Money</th>
+              <!-- <th>SL</th> -->
+              <th>Function</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- <tr>
+              <td style="display: flex; align-items: center">
+                <img style="width: 100px" src="img/p1.jpg" alt="" />IP
+              </td>
+              <td>
+                <p><span>40000</span><sup>đ</sup></p>
+              </td>
+              <td>
+                <input
+                  style="width: 30px; outline: none"
+                  type="number"
+                  value="1"
+                  min="0"
+                />
+              </td>
+              <td
+                style="
+                  cursor: pointer;
+                  border: 1px solid #000;
+                  padding: 5px;
+                  background-color: antiquewhite;
+                  width: 20px;
+                  height: 5px;
+                "
+              >
+                Delete
+              </td>
+            </tr> -->
+          </tbody>
+        </table>
+      </form>
+      <!-- tổng tiền -->
+      <div style="text-align: center; background-color: #7ca479" class="Total">
+        <p style="font-weight: bold">
+          Total money = <span>0</span><sup>$</sup>
+        </p>
+        <!-- nút mua -->
+        <button
+          style="
+            margin-top: 12px;
+            height: 30px;
+            padding: 0px 12px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: tomato;
+            margin-bottom: 10px;
+          "
+        >
+          <a style="text-decoration: none" href="#">Buy here</a>
+        </button>
+      </div>
+    </section>
+
+    <!-- ========================================= -->
+
+    <!-- footer -->
+    <footer>
+      <div class="container">
+        <div class="contact">
+          <h3>Connect</h3>
+          <p>Address: 123 Đường Le Duc Tho, TP Ha Noi</p>
+          <p>Email: trung@gmail.com</p>
+          <p>Phone: 0123456789</p>
+        </div>
+        <div class="reviews">
+          <h3>Evaluate</h3>
+          <p>"Product so good, vip pro ok baby girl !!!!"</p>
+          <p class="customer">- Nguyen Viet Trung</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- xử lý js -->
+    <script src="./js/index.js"></script>
+  </body>
+</html>
